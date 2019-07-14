@@ -52,6 +52,10 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
+        $menuItems[] = ['label' => 'tickets', 'url' => ['/ticket/index']];
+        $menuItems[] = ['label' => 'createTicket', 'url' => ['/ticket/create']];
+        $menuItems[] = ['label' => 'products', 'url' => ['/product/index']];
+        $menuItems[] = ['label' => 'createProduct', 'url' => ['/product/create']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
