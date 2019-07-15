@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'subject') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'message') ?>
 
     <?= $form->field($model, 'customer_id') ?>
 
@@ -27,9 +27,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'created_at') ?>
 
-    <?php // echo $form->field($model, 'isAnswered') ?>
+    <?php // echo $form->field($model, 'is_answered') ?>
 
-    <?php // echo $form->field($model, 'isClosed') ?>
+    <?php // echo $form->field($model, 'is_closed') ?>
 
     <?php // echo $form->field($model, 'product_id') ?>
 

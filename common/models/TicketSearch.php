@@ -17,8 +17,8 @@ class TicketSearch extends Ticket
     public function rules()
     {
         return [
-            [['id', 'customer_id', 'admin_id', 'isAnswered', 'isClosed', 'product_id'], 'integer'],
-            [['subject', 'description', 'created_at'], 'safe'],
+            [['id', 'customer_id', 'admin_id', 'is_answered', 'is_closed', 'product_id'], 'integer'],
+            [['subject', 'message', 'created_at'], 'safe'],
         ];
     }
 
@@ -62,13 +62,13 @@ class TicketSearch extends Ticket
             'customer_id' => $this->customer_id,
             'admin_id' => $this->admin_id,
             'created_at' => $this->created_at,
-            'isAnswered' => $this->isAnswered,
-            'isClosed' => $this->isClosed,
+            'is_answered' => $this->is_answered,
+            'is_closed' => $this->is_closed,
             'product_id' => $this->product_id,
         ]);
 
         $query->andFilterWhere(['like', 'subject', $this->subject])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'message', $this->message]);
 
         return $dataProvider;
     }

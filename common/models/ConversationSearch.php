@@ -4,12 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Answer;
+use common\models\Conversation;
 
 /**
- * answerSearch represents the model behind the search form of `common\models\Answer`.
+ * ConversationSearch represents the model behind the search form of `common\models\Conversation`.
  */
-class answerSearch extends Answer
+class ConversationSearch extends Conversation
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class answerSearch extends Answer
      */
     public function search($params)
     {
-        $query = Answer::find();
+        $query = Conversation::find();
 
         // add conditions that should always apply here
 

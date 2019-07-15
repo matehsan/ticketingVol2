@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "answer".
+ * This is the model class for table "conversation".
  *
  * @property int $id
  * @property string $message
@@ -16,14 +16,14 @@ use Yii;
  * @property Ticket $ticket
  * @property User $user
  */
-class Answer extends \yii\db\ActiveRecord
+class Conversation extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'answer';
+        return 'conversation';
     }
 
     /**
