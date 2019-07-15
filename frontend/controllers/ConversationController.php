@@ -10,9 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ConvesationController implements the CRUD actions for Conversation model.
+ * ConversationController implements the CRUD actions for Conversation model.
  */
-class ConvesationController extends Controller
+class ConversationController extends Controller
 {
     /**
      * {@inheritdoc}
