@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "conversation".
@@ -32,7 +33,7 @@ class Conversation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['message', 'user_id', 'ticket_id', 'created_at'], 'required'],
+            [['message', 'user_id', 'ticket_id',], 'required'],
             [['user_id', 'ticket_id'], 'integer'],
             [['created_at'], 'safe'],
             [['message'], 'string', 'max' => 300],
@@ -70,4 +71,18 @@ class Conversation extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+    /*qable save shodan to db user_id ro set mikone */
+    public function beforeSave($insert)
+    {
+            $this->user_id=Yii::$app->user->getId();
+            return true;
+
+    }
+    public function behaviors()
+    {
+      return[
+          TimestampBehavior::className(),
+      ];
+    }
+
 }

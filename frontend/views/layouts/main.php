@@ -54,8 +54,8 @@ AppAsset::register($this);
             . '</li>';
         $menuItems[] = ['label' => 'tickets', 'url' => ['/ticket/index']];
         $menuItems[] = ['label' => 'createTicket', 'url' => ['/ticket/create']];
-        $menuItems[] = ['label' => 'products', 'url' => ['/product/index']];
-        $menuItems[] = ['label' => 'createProduct', 'url' => ['/product/create']];
+        $menuItems[] = ['label' => 'conversation', 'url' => ['/conversation/index']];
+        $menuItems[] = ['label' => 'createConversation', 'url' => ['/conversation/create']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

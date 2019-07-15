@@ -10,35 +10,75 @@ use yii\grid\GridView;
 $this->title = 'Tickets';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ticket-index">
+<!--<div class="ticket-index">-->
+<!---->
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
+<!---->
+<!--    <p>-->
+<!--        --><?//= Html::a('Create Ticket', ['create'], ['class' => 'btn btn-success']) ?>
+<!--    </p>-->
+<!---->
+<!--    --><?php //// echo $this->render('_search', ['model' => $searchModel]); ?>
+<!---->
+<!--    --><?//= GridView::widget([
+//        'dataProvider' => $dataProvider,
+////        'filterModel' => $searchModel,
+//        'columns' => [
+//            ['class' => 'yii\grid\SerialColumn'],
+//
+//            'id',
+//            'subject',
+//            'message:ntext',
+//            'customer_id',
+//            'admin_id',
+//            //'created_at',
+//            //'is_answered',
+//            //'is_closed',
+//            //'product_id',
+//
+//            ['class' => 'yii\grid\ActionColumn'],
+//        ],
+//    ]); ?>
+<!--</div>-->
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Ticket', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<?=''/*  ListView::widget([
+    'dataProvider' => $dataProvider,
+    'itemView' => 'ticketTemplate',
+]);*/?>
+<!---->
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    //'filterModel' => $searchModel,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'subject',
-            'message:ntext',
-            'customer_id',
-            'admin_id',
-            //'created_at',
-            //'is_answered',
-            //'is_closed',
-            //'product_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
+//        'id',
+        'subject',
+        'message:ntext',
+//        'customer_id',
+//        'admin_id',
+        //'created_at',
+        //'is_answered',
+        //'is_closed',
+        'product_id',
+        [
+            'label' => 'situation',
+            'format' => 'raw',
+            'value' => function ($data) {
+                if($data->is_closed==false) {
+                    if ($data->is_answered == false) {
+                        return Html::a('در انتطار', ['conversation/index', 'id' => $data->id], ['class' => 'btn btn-warning']);
+                    } else {
+                        return Html::a('جواب داری!', ['conversation/index', 'id' => $data->id,], ['class' => 'btn btn-success', 'data-method' => 'POST']);
+                    }
+                }
+                else{
+                    return Html::a('بسته شده', ['conversation/index','id'=>$data->id], ['class' => 'btn btn-default']);
+                }
+            },
         ],
-    ]); ?>
+    ],
+]); ?>
 
 
-</div>
