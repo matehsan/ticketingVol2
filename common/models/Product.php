@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "product".
  *
  * @property int $id
- * @property string $Name
+ * @property string $name
  *
  * @property Ticket[] $tickets
  */
@@ -28,8 +28,8 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Name'], 'required'],
-            [['Name'], 'string', 'max' => 11],
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 11],
         ];
     }
 
@@ -40,7 +40,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'Name' => 'Name',
+            'name' => 'Name',
         ];
     }
 

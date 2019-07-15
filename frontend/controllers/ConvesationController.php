@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Answer;
-use common\models\answerSearch;
+use common\models\Conversation;
+use common\models\ConversationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AnswerController implements the CRUD actions for Answer model.
+ * ConvesationController implements the CRUD actions for Conversation model.
  */
-class AnswerController extends Controller
+class ConvesationController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class AnswerController extends Controller
     }
 
     /**
-     * Lists all Answer models.
+     * Lists all Conversation models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new answerSearch();
+        $searchModel = new ConversationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class AnswerController extends Controller
     }
 
     /**
-     * Displays a single Answer model.
+     * Displays a single Conversation model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class AnswerController extends Controller
     }
 
     /**
-     * Creates a new Answer model.
+     * Creates a new Conversation model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Answer();
+        $model = new Conversation();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class AnswerController extends Controller
     }
 
     /**
-     * Updates an existing Answer model.
+     * Updates an existing Conversation model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class AnswerController extends Controller
     }
 
     /**
-     * Deletes an existing Answer model.
+     * Deletes an existing Conversation model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class AnswerController extends Controller
     }
 
     /**
-     * Finds the Answer model based on its primary key value.
+     * Finds the Conversation model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Answer the loaded model
+     * @return Conversation the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Answer::findOne($id)) !== null) {
+        if (($model = Conversation::findOne($id)) !== null) {
             return $model;
         }
 

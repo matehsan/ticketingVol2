@@ -28,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'subject',
-            'description',
+            'message:ntext',
             'customer_id',
             'admin_id',
             //'created_at',
-            //'isAnswered',
-            //'isClosed',
+            //'is_answered',
+            //'is_closed',
             //'product_id',
 
             ['class' => 'yii\grid\ActionColumn'],
