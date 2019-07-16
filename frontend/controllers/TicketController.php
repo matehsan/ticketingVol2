@@ -12,6 +12,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 use yii\widgets\ContentDecorator;
 
 /**
@@ -53,18 +54,7 @@ class TicketController extends Controller
      */
     public function actionIndex()
     {
-//        $searchModel = new TicketSearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//
-//        return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
-//        ]);
-
-        $user = User::findIdentity(Yii::$app->user->getId());
-
-        if ($user->role == 'customer') {
-            $query = Ticket::find()->where('customer_id=' . Yii::$app->user->getId());
+            $query = Ticket::find()->where('customer_id='. Yii::$app->user->getId());
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => [
@@ -79,25 +69,9 @@ class TicketController extends Controller
                     ]
                 ],
             ]);
-
-            $tickets = $dataProvider->getModels();
-
             return $this->render('index', [
-                'tickets' => $tickets,
                 'dataProvider' => $dataProvider,
             ]);
-        } else if ($user->role == 'admin') {
-            $query = Ticket::find();
-            $dataProvider = new ActiveDataProvider([
-                'query' => $query,
-            ]);
-            $tickets = $dataProvider->getModels();
-            return $this->render('index', [
-                'tickets' => $tickets,
-                'dataProvider' => $dataProvider,
-            ]);
-        }
-
     }
 
     /**
@@ -120,80 +94,37 @@ class TicketController extends Controller
      */
     public function actionCreate()
     {
-        if (!Yii::$app->user->isGuest) {
-
             $ticket = new Ticket();
-            $ticket->customer_id = Yii::$app->user->getId();
-            date_default_timezone_set('Asia/tehran');
-            $ticket->created_at = date("Y/m/d-H:m:s");
+            if ($ticket->load(Yii::$app->request->post())) {
+                $ticket->customer_id = Yii::$app->user->getId();
+                $file=UploadedFile::getInstance($ticket,'file');
+                $file->saveAs('uploads/ticket'.$ticket->id.'.'.$file->extension);
+                $ticket->file='uploads/ticket'.$ticket->id.'.'.$file->extension;
+                $ticket->save();
 
-            if ($ticket->load(Yii::$app->request->post()) && $ticket->save()) {
 //                @todo ye answer besaze
-//                var_dump($ticket->description);
-//                exit();
-                return $this->redirect(['conversation/index', 'id' => $ticket->id, 'message' => $ticket->message]);
+                $conversation = new Conversation();
+                $conversation->message=$ticket->message;
+                $conversation->ticket_id=$ticket->id;
+                $conversation->user_id=Yii::$app->user->getId();
+                $conversation->save();
+
+                return $this->redirect(['conversation/index', 'ticket_id' => $ticket->id,]);
 //                return $this->redirect(['ticket/index']);
             }
-
-
             return $this->render('create', [
                 'ticket' => $ticket,
             ]);
-        } else {
-            return $this->redirect('?r=site/login');
-        }
     }
-
-    /**
-     * Updates an existing Ticket model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
+    public function actionClose($ticket_id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Ticket model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Ticket model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Ticket the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionClose()
-    {
-        $ticket = Ticket::findOne(Yii::$app->request->get('ticket_id'));
+        $ticket = Ticket::findOne($ticket_id);
         $ticket->is_closed = 1;
         if(!$ticket->save()) {
             var_dump($ticket->errors);
             exit();
         }
-        $this->redirect('index.php?r=ticket/index');
+        $this->redirect('index');
     }
     protected function findModel($id)
     {

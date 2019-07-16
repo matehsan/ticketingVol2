@@ -32,6 +32,9 @@ use yii\helpers\Html;
                     <div class="description">
                         <p class="card-text"><?= $form->field($ticket, 'message')->textarea(['maxlength' => true]) ?></p>
                     </div>
+                    <div class="file">
+                        <?= $form->field($ticket,'file')->fileInput()?>
+                    </div>
                 </div>
                 <a href="#">
                     <h1 class="card-footer">

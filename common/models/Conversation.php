@@ -19,6 +19,7 @@ use yii\behaviors\TimestampBehavior;
  */
 class Conversation extends \yii\db\ActiveRecord
 {
+    public $updated_at;
     /**
      * {@inheritdoc}
      */
@@ -35,7 +36,7 @@ class Conversation extends \yii\db\ActiveRecord
         return [
             [['message', 'user_id', 'ticket_id',], 'required'],
             [['user_id', 'ticket_id'], 'integer'],
-            [['created_at'], 'safe'],
+            [['created_at','updated_at'], 'safe'],
             [['message'], 'string', 'max' => 300],
             [['ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ticket::className(), 'targetAttribute' => ['ticket_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],

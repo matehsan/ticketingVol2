@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php
-        $ticket=Ticket::findOne(Yii::$app->request->get('id'));
+        $ticket=Ticket::findOne(Yii::$app->request->get('ticket_id'));
         if($ticket->is_closed==true){
             $this->title = 'conversations is closed';
         }
@@ -115,7 +115,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-footer bg-success">
                 <?php
                 echo Html::submitButton('ارسال پیام', ['class' => 'btn btn-success']);
-                echo  Html::a('بستن تیکت',['ticket/close','ticket_id'=>Yii::$app->request->get('id')],['class'=>'btn btn-danger'])
+                echo  Html::a('بستن تیکت',['ticket/close','ticket_id'=>Yii::$app->request->get('ticket_id')],['class'=>'btn btn-danger'])
 
                 ?>
 
