@@ -10,6 +10,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property string $message
+ * @property string $file
  * @property int $user_id
  * @property int $ticket_id
  * @property string $created_at
@@ -37,7 +38,7 @@ class Conversation extends \yii\db\ActiveRecord
             [['message', 'user_id', 'ticket_id',], 'required'],
             [['user_id', 'ticket_id'], 'integer'],
             [['created_at','updated_at'], 'safe'],
-            [['message'], 'string', 'max' => 300],
+            [['message','file'], 'string', 'max' => 300],
             [['ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ticket::className(), 'targetAttribute' => ['ticket_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];

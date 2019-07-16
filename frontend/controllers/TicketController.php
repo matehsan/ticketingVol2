@@ -97,16 +97,19 @@ class TicketController extends Controller
             $ticket = new Ticket();
             if ($ticket->load(Yii::$app->request->post())) {
                 $ticket->customer_id = Yii::$app->user->getId();
-                $file=UploadedFile::getInstance($ticket,'file');
-                $file->saveAs('uploads/ticket'.$ticket->id.'.'.$file->extension);
-                $ticket->file='uploads/ticket'.$ticket->id.'.'.$file->extension;
                 $ticket->save();
 
-//                @todo ye answer besaze
+//                @todo ye conversation  besaze
                 $conversation = new Conversation();
                 $conversation->message=$ticket->message;
                 $conversation->ticket_id=$ticket->id;
                 $conversation->user_id=Yii::$app->user->getId();
+                $conversation->save();
+
+                mkdir('../../common/uploads/ticket/'.$ticket->id.'',0777,true);
+                $file=UploadedFile::getInstance($ticket,'file');
+                $file->saveAs('../../common/uploads/ticket/'.$ticket->id.'/'.$conversation->id.'_conversation.'.$file->extension);
+                $conversation->file='../../common/uploads/ticket/'.$ticket->id.'/'.$conversation->id.'_conversation.'.$file->extension;
                 $conversation->save();
 
                 return $this->redirect(['conversation/index', 'ticket_id' => $ticket->id,]);

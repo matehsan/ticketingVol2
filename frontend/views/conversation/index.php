@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--        <div class="card text-center">-->
 <!--            <div class="card-header">-->
 <!---->
-<!--                <h1>--><?//= $form->field($newconversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?><!--</h1>-->
+<!--                <h1>--><?=''/* $form->field($newconversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) */?><!--</h1>-->
 <!--            </div>-->
 <!--            <div class="card-footer bg-success">-->
 <!--                --><?php
@@ -90,6 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php foreach ($conversations as $conversation){ ?>
         <div class="<?php if (User::findByUsername($conversation->user->username)->role == "customer"){echo 'userMessage';}else{echo 'admin';} ?>">
             <?= $conversation->message ?>
+            <img src="<? echo $conversation->file ?>">
             <div class="pn"><code><?= $conversation->user->username." [ ".$conversation->created_at." ]"?></code></div>
         </div>
 
@@ -111,6 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-header">
 
                 <h1><?= $form->field($new_conversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?></h1>
+                <h6><?= $form->field($new_conversation, 'file')->fileInput()?></h6>
             </div>
             <div class="card-footer bg-success">
                 <?php
