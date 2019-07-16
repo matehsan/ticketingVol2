@@ -74,17 +74,26 @@ class Conversation extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
     /*qable save shodan to db user_id ro set mikone */
+
     public function beforeSave($insert)
     {
-            $this->user_id=Yii::$app->user->getId();
+        if(parent::beforeSave($insert)) {
+            $this->user_id = Yii::$app->user->getId();
             return true;
+        }
 
     }
+    public function afterFind()
+    {
+        $this->created_at=date('Y/M/d h:i',$this->created_at);
+        parent::afterFind();
+    }
+
     public function behaviors()
     {
-      return[
+        return[
           TimestampBehavior::className(),
-      ];
+        ];
     }
 
 }

@@ -96,7 +96,6 @@ class TicketController extends Controller
     {
             $ticket = new Ticket();
             if ($ticket->load(Yii::$app->request->post())) {
-                $ticket->customer_id = Yii::$app->user->getId();
                 $ticket->save();
 
 //                @todo ye conversation  besaze
@@ -106,11 +105,13 @@ class TicketController extends Controller
                 $conversation->user_id=Yii::$app->user->getId();
                 $conversation->save();
 
-                mkdir('../../common/uploads/ticket/'.$ticket->id.'',0777,true);
-                $file=UploadedFile::getInstance($ticket,'file');
-                $file->saveAs('../../common/uploads/ticket/'.$ticket->id.'/'.$conversation->id.'_conversation.'.$file->extension);
-                $conversation->file='../../common/uploads/ticket/'.$ticket->id.'/'.$conversation->id.'_conversation.'.$file->extension;
-                $conversation->save();
+                if(UploadedFile::getInstance($ticket,'file')) {
+                    mkdir('../../common/uploads/ticket/' . $ticket->id . '', 0777, true);
+                    $file = UploadedFile::getInstance($ticket, 'file');
+                    $file->saveAs('../../common/uploads/ticket/' . $ticket->id . '/' . $conversation->id . '_conversation.' . $file->extension);
+                    $conversation->file = '../../common/uploads/ticket/' . $ticket->id . '/' . $conversation->id . '_conversation.' . $file->extension;
+                    $conversation->save();
+                }
 
                 return $this->redirect(['conversation/index', 'ticket_id' => $ticket->id,]);
 //                return $this->redirect(['ticket/index']);

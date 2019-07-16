@@ -119,5 +119,12 @@ class Ticket extends \yii\db\ActiveRecord
             TimestampBehavior::className(),
         ];
     }
+    public function beforeSave($insert)
+    {
+         if(parent::beforeSave($insert)){
+             $this->customer_id=Yii::$app->user->getId();
+             return true    ;
+    }
+    }
 
 }

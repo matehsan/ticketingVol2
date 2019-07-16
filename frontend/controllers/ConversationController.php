@@ -46,19 +46,18 @@ class ConversationController extends Controller
                 $new_conversation = new conversation();
                 $user = User::findIdentity(Yii::$app->user->getId());
                 $new_conversation->user_id = $user->id;
-//        @todo unix time va behavior to modele answer baraye time create_at va updated_at
                 $new_conversation->ticket_id = $ticket_id;
-//                $new_conversation->message = Yii::$app->request->post('message', ' ');
 
                 /**
                  * @todo bhjhjhjhj
                  */
                 if ($new_conversation->load(Yii::$app->request->post()) && $new_conversation->save()) {
-
-                    $file=UploadedFile::getInstance($new_conversation,'file');
-                    $file->saveAs('../../common/uploads/ticket/'.$ticket_id.'/'.$new_conversation->id.'_conversation.'.$file->extension);
-                    $new_conversation->file='../../common/uploads/ticket/'.$ticket_id.'/'.$new_conversation->id.'_conversation.'.$file->extension;
-                    $new_conversation->save();
+                    if(UploadedFile::getInstance($new_conversation, 'file')) {
+                        $file = UploadedFile::getInstance($new_conversation, 'file');
+                        $file->saveAs('../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension);
+                        $new_conversation->file = '../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension;
+                        $new_conversation->save();
+                    }
 
                     $ticket->is_answered = false;
                     $ticket->save();
