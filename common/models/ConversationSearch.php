@@ -17,8 +17,8 @@ class ConversationSearch extends Conversation
     public function rules()
     {
         return [
-            [['id', 'user_id', 'ticket_id'], 'integer'],
-            [['message', 'created_at'], 'safe'],
+            [['id', 'user_id', 'ticket_id', 'created_at'], 'integer'],
+            [['message', 'file'], 'safe'],
         ];
     }
 
@@ -64,7 +64,8 @@ class ConversationSearch extends Conversation
             'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['like', 'message', $this->message]);
+        $query->andFilterWhere(['like', 'message', $this->message])
+            ->andFilterWhere(['like', 'file', $this->file]);
 
         return $dataProvider;
     }

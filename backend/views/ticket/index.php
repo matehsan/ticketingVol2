@@ -26,12 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
+            'id',
             'subject',
             'message:ntext',
             'customer_id',
             'admin_id',
-            //'created_at',
+//            [
+//                'label'=>'Created at',
+//                'format' => 'raw',
+//                'value'=>function ($data) {
+//                    return Yii::$app->jdate->date('Y/m/d',$data->created_at);
+//                }
+//            ],
+            'created_at',
             //'is_answered',
             //'is_closed',
             //'product_id',
@@ -41,14 +48,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>function ($data) {
                     if ($data->is_closed == false) {
                         if ($data->is_answered == 0) {
-                            return Html::a('Answer', ['/answer/index', 'id' => $data->ID], ['class' => 'btn btn-danger', 'data-method' => 'POST']);
+                            return Html::a('Answer', ['/conversation/index', 'ticket_id' => $data->id], ['class' => 'btn btn-danger', 'data-method' => 'POST']);
 
                         } else {
-                            return Html::a('Answer', ['/answer/index', 'id' => $data->ID], ['class' => 'btn btn-success', 'data-method' => 'POST']);
+                            return Html::a('Answer', ['/conversation/index', 'ticket_id' => $data->id], ['class' => 'btn btn-success', 'data-method' => 'POST']);
                         }
                     }
                     else{
-                        return Html::a('بسته شده', ['/answer/index','id'=>$data->ID], ['class' => 'btn btn-default']);
+                        return Html::a('بسته شده', ['/conversation/index','ticket_id'=>$data->id], ['class' => 'btn btn-default']);
                     }
                 }
             ],

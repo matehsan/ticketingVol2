@@ -6,6 +6,9 @@ return [
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
+        'jdate' => [
+            'class' => 'jDate\DateTime'
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

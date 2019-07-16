@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e49b312d14b408b3b7091e599a672f80",
+    "content-hash": "9d7ebffb522f9a92b2dc3979b692a1e8",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -325,6 +325,51 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "mohammad-mahdy/yii2-jdate",
+            "version": "0.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MrMiM/yii2-jdate.git",
+                "reference": "9b95e3407ef828b68cc5a709de61a2981a416a41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MrMiM/yii2-jdate/zipball/9b95e3407ef828b68cc5a709de61a2981a416a41",
+                "reference": "9b95e3407ef828b68cc5a709de61a2981a416a41",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jDate\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Mohammad Mahdi Gholamian",
+                    "email": "mm.gholamian@yahoo.com"
+                }
+            ],
+            "description": "Jalali date & time.",
+            "keywords": [
+                "Jalali Data Time",
+                "extension",
+                "jDate",
+                "persian date",
+                "yii",
+                "yii2",
+                "yiiframeowrk"
+            ],
+            "time": "2016-12-27T09:48:31+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
