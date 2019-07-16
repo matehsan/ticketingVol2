@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\NotFoundHttpException;
 
 /**
  * This is the model class for table "ticket".
@@ -17,7 +18,7 @@ use Yii;
  * @property int $is_closed
  * @property int $product_id
  *
- * @property Answer[] $answers
+ * @property Conversation[] $conversations
  * @property User $customer
  * @property User $admin
  * @property Product $product
@@ -70,9 +71,9 @@ class Ticket extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAnswers()
+    public function getConversations()
     {
-        return $this->hasMany(Answer::className(), ['ticket_id' => 'id']);
+        return $this->hasMany(Conversation::className(), ['ticket_id' => 'id']);
     }
 
     /**
@@ -98,4 +99,15 @@ class Ticket extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
+    public function getModel($id){
+        if (($model = Ticket::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function makeClosed(){
+        $this->is_closed=true;
+    }
+
 }

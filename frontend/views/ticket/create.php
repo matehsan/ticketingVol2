@@ -1,20 +1,47 @@
 <?php
 
+use common\models\Product;
+use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Ticket */
-
-$this->title = 'Create Ticket';
-$this->params['breadcrumbs'][] = ['label' => 'Tickets', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+/* @var $ticket common\models\Ticket */
+/* @var $form yii\widgets\ActiveForm */
 ?>
-<div class="ticket-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
 
+
+
+<div class="">
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-md-4 pull-right">
+            <div class="card border-primary text-center">
+                <div class="card-header"><?= $form->field($ticket, 'subject')->textInput(['maxlength' => true]) ?></div>
+                <div class="product">
+
+                    <?= $form->field($ticket, 'product_id')->dropDownList(
+                        ArrayHelper::map(product::find()->all(), 'id', 'name'),
+                        ['prompt' => 'select product']
+
+                    ) ?>
+                </div>
+                <div class="card-body ">
+                    <div class="description">
+                        <p class="card-text"><?= $form->field($ticket, 'message')->textarea(['maxlength' => true]) ?></p>
+                    </div>
+                </div>
+                <a href="#">
+                    <h1 class="card-footer">
+
+                        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+
+                    </h1>
+                </a>
+            </div>
+        </div>
+    </div>
+    <?php ActiveForm::end(); ?>
 </div>
