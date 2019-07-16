@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -70,12 +71,14 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        //$this->layout = 'main-login';
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post()) && isset($model->getUser()->role) && $model->getUser()->role == "admin" && $model->login()) {
             return $this->goBack();
         } else {
             $model->password = '';
@@ -97,4 +100,5 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
 }
