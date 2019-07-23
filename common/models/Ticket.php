@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\widgets\Alert;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\web\NotFoundHttpException;
@@ -128,13 +129,18 @@ class Ticket extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert)) {
-            $this->customer_id = Yii::$app->user->getId();
-            return true;
+        if ($this->isNewRecord) {
+            if (parent::beforeSave($insert)) {
+                $this->customer_id = Yii::$app->user->getId();
+                return true;
+            }
+
         }
     }
-    public function afterFind (){
-        $this->created_at=Yii::$app->jdate->date('Y/m/d H:i',$this->created_at);
+
+    public function afterFind()
+    {
+        $this->created_at = Yii::$app->jdate->date('Y/m/d H:i', $this->created_at);
         parent::afterFind();
     }
 

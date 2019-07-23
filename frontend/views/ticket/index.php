@@ -7,46 +7,10 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\TicketSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tickets';
+$this->title = 'Ticket';
 $this->params['breadcrumbs'][] = $this->title;
+echo "<h1>"."Your ".$this->title."</h1>"
 ?>
-<!--<div class="ticket-index">-->
-<!---->
-<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
-<!---->
-<!--    <p>-->
-<!--        --><?//= Html::a('Create Ticket', ['create'], ['class' => 'btn btn-success']) ?>
-<!--    </p>-->
-<!---->
-<!--    --><?php //// echo $this->render('_search', ['model' => $searchModel]); ?>
-<!---->
-<!--    --><?//= GridView::widget([
-//        'dataProvider' => $dataProvider,
-////        'filterModel' => $searchModel,
-//        'columns' => [
-//            ['class' => 'yii\grid\SerialColumn'],
-//
-//            'id',
-//            'subject',
-//            'message:ntext',
-//            'customer_id',
-//            'admin_id',
-//            //'created_at',
-//            //'is_answered',
-//            //'is_closed',
-//            //'product_id',
-//
-//            ['class' => 'yii\grid\ActionColumn'],
-//        ],
-//    ]); ?>
-<!--</div>-->
-
-
-<?=''/*  ListView::widget([
-    'dataProvider' => $dataProvider,
-    'itemView' => 'ticketTemplate',
-]);*/?>
-<!---->
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     //'filterModel' => $searchModel,

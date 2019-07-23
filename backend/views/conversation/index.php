@@ -19,86 +19,58 @@ use yii\web\View;
 $this->title = 'conversations';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<!---->
-<?php //foreach ($conversations as $conversation){ ?>
-<!---->
-<!--<div class="card text-center">-->
-<!--    <div class="owner-message ">-->
-<!--        --><?php //echo $conversation->owner ?><!--:-->
-<!--    </div>-->
-<!--    <div class="message">-->
-<!--        --><?php //echo $conversation->message ?>
-<!--    </div>-->
-<!--    <div class="created-at">-->
-<!--        created at:--><?php //echo $conversation->created_at ?>
-<!--    </div>-->
-<!--    <div>-->
-<!---->
-<!--        --><?php //} ?>
-<!--        --><?php
-//        $ticket=Ticket::findOne(Yii::$app->request->get('id'));
-//        if(!$ticket->isClosed==true){
-//        $form =ActiveForm::begin();
-//        ?>
-<!--        <div class="card text-center">-->
-<!--            <div class="card-header">-->
-<!---->
-<!--                <h1>--><?=''/* $form->field($newconversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) */?><!--</h1>-->
-<!--            </div>-->
-<!--            <div class="card-footer bg-success">-->
-<!--                --><?php
-//                echo Html::submitButton('ارسال پیام', ['class' => 'btn btn-success']);
-//                echo  Html::a('بستن تیکت',['ticket/close','IdTicket'=>Yii::$app->request->get('id')],['class'=>'btn btn-danger'])
-//
-//                ?>
-<!---->
-<!--            </div>-->
-<!--        </div>-->
-<?php //ActiveForm::end() ; ?><!----><?php //} ?>
-
 <div class="answer-index">
 
     <p>
         <?php
-        $ticket=Ticket::findOne(Yii::$app->request->get('ticket_id'));
-        if($ticket->is_closed==true){
+        $ticket = Ticket::findOne(Yii::$app->request->get('ticket_id'));
+        if ($ticket->is_closed == true) {
             $this->title = 'conversations is closed';
-        }
-        else{
+        } else {
             $this->title = 'conversations';
         }
         ?>
     </p>
     <style>
-        .userMessage{
+        .userMessage {
+            word-wrap: break-word;
             border-radius: 5px;
             background-color: #86BB71;
             margin-bottom: 3px;
             padding: 10px;
             text-align: left;
         }
+
         .admin {
+            word-wrap: break-word;
             border-radius: 5px;
             background-color: #94C2ED;
             margin-bottom: 3px;
             padding: 10px;
             text-align: left;
         }
-        .pn{
+
+        .pn {
             text-align: right;
             color: grey;
         }
 
+
     </style>
-    <?php foreach ($conversations as $conversation){ ?>
-        <div class="<?php if (User::findByUsername($conversation->user->username)->role == "customer"){echo 'userMessage';}else{echo 'admin';} ?>">
+    <?php foreach ($conversations as $conversation) { ?>
+        <div class="<?php if (User::findByUsername($conversation->user->username)->role == "customer") {
+            echo 'userMessage';
+        } else {
+            echo 'admin';
+        } ?>">
             <?= $conversation->message ?>
-            <img src="<? echo $conversation->file ?>">
-            <div class="pn"><code><?= $conversation->user->username." [ ".$conversation->created_at." ]"?></code></div>
+            <img src="<?php
+            if ($conversation->file) {
+                echo $conversation->file ;
+            }?>">
+            <div class="pn"><code><?= $conversation->user->username . " [ " . $conversation->created_at . " ]" ?></code>
+            </div>
         </div>
-
-
 
 
     <?php } ?>
@@ -109,24 +81,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <?php
-    if(!$ticket->is_closed==true){
-        $form =ActiveForm::begin();
-        ?>
-        <div class="card text-center">
-            <div class="card-header">
+    if (!$ticket->is_closed == true){
+    $form = ActiveForm::begin();
+    ?>
 
-                <h1><?= $form->field($new_conversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?></h1>
-                <h6><?= $form->field($new_conversation, 'file')->fileInput()?></h6>
-            </div>
-            <div class="card-footer bg-success">
-                <?php
-                echo Html::submitButton('ارسال پیام', ['class' => 'btn btn-success']);
-                echo  Html::a('بستن تیکت',['ticket/close','ticket_id'=>Yii::$app->request->get('ticket_id')],['class'=>'btn btn-danger'])
+    <h3><?= $form->field($new_conversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?></h3>
+    <h6><?= $form->field($new_conversation, 'file')->fileInput() ?></h6>
+</div>
+<?php
+echo Html::submitButton('ارسال پیام', ['class' => 'btn btn-success'])." ";
+echo Html::a('بستن تیکت', ['ticket/close', 'ticket_id' => Yii::$app->request->get('ticket_id')], ['class' => 'btn btn-danger'])
 
-                ?>
+?>
 
-            </div>
-        </div>
-        <?php ActiveForm::end() ; ?><?php } ?>
+
+<?php ActiveForm::end(); ?><?php } ?>
 
 </div>

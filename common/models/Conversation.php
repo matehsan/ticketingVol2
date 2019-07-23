@@ -85,7 +85,7 @@ class Conversation extends \yii\db\ActiveRecord
     }
     public function afterFind()
     {
-        $this->created_at=Yii::$app->jdate->date('Y/m/d h:i',$this->created_at);
+        $this->created_at=Yii::$app->jdate->date('Y/m/d H:i',$this->created_at);
         parent::afterFind();
     }
 

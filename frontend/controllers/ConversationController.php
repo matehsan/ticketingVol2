@@ -48,9 +48,6 @@ class ConversationController extends Controller
                 $new_conversation->user_id = $user->id;
                 $new_conversation->ticket_id = $ticket_id;
 
-                /**
-                 * @todo bhjhjhjhj
-                 */
                 if ($new_conversation->load(Yii::$app->request->post()) && $new_conversation->save()) {
                     if(UploadedFile::getInstance($new_conversation, 'file')) {
                         $file = UploadedFile::getInstance($new_conversation, 'file');
@@ -59,7 +56,7 @@ class ConversationController extends Controller
                         $new_conversation->save();
                     }
 
-                    $ticket->is_answered = false;
+                    $ticket->is_answered = 0;
                     $ticket->save();
                     return $this->redirect(['index', 'ticket_id' => $ticket_id]);
                 }

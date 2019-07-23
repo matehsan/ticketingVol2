@@ -124,10 +124,7 @@ class TicketController extends Controller
     {
         $ticket = Ticket::findOne($ticket_id);
         $ticket->is_closed = 1;
-        if(!$ticket->save()) {
-            var_dump($ticket->errors);
-            exit();
-        }
+        $ticket->save();
         $this->redirect('index');
     }
     protected function findModel($id)

@@ -39,41 +39,42 @@ class ConversationController extends Controller
      */
     public function actionIndex($ticket_id)
     {
-        $ticket=Ticket::findOne($ticket_id);
 
-                $new_conversation = new conversation();
-                $user = User::findIdentity(Yii::$app->user->getId());
-                $new_conversation->user_id = $user->id;
-                $new_conversation->ticket_id = $ticket_id;
+        $ticket = Ticket::findOne($ticket_id);
 
-                if ($new_conversation->load(Yii::$app->request->post()) && $new_conversation->save()) {
-                    if(UploadedFile::getInstance($new_conversation, 'file')) {
-                        $file = UploadedFile::getInstance($new_conversation, 'file');
-                        $file->saveAs('../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension);
-                        $new_conversation->file = '../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension;
-                        $new_conversation->save();
-                    }
+        $new_conversation = new conversation();
+        $user = User::findIdentity(Yii::$app->user->getId());
+        $new_conversation->user_id = $user->id;
+        $new_conversation->ticket_id = $ticket_id;
 
-                    $ticket->is_answered = 1;
-                    $ticket->save();
-                    return $this->redirect(['index', 'ticket_id' => $ticket_id]);
-                }
-                $query = conversation::find()->where('ticket_id=' . $ticket_id);
-                $conversations = new ActiveDataProvider([
-                    'query' => $query,
-                    'pagination' => [
-                        'pageSize' => 20
-                    ],
-                    'sort' => [
-                        'defaultOrder' => [
-                            'created_at' => SORT_ASC,
-                        ]
-                    ],
-                ]);
-                return $this->render('index', [
-                    'conversations' => $conversations->getModels(),
-                    'new_conversation' => $new_conversation,
-                ]);
+        if ($new_conversation->load(Yii::$app->request->post()) && $new_conversation->save()) {
+            if (UploadedFile::getInstance($new_conversation, 'file')) {
+                $file = UploadedFile::getInstance($new_conversation, 'file');
+                $file->saveAs('../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension);
+                $new_conversation->file = '../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension;
+                $new_conversation->save();
+            }
+
+            $ticket->is_answered = 1;
+            $ticket->save();
+            return $this->redirect(['index', 'ticket_id' => $ticket_id]);
+        }
+        $query = conversation::find()->where('ticket_id=' . $ticket_id);
+        $conversations = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 20
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_ASC,
+                ]
+            ],
+        ]);
+        return $this->render('index', [
+            'conversations' => $conversations->getModels(),
+            'new_conversation' => $new_conversation,
+        ]);
 
     }
 
