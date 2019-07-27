@@ -20,7 +20,6 @@ use yii\web\NotFoundHttpException;
  * @property int $is_answered
  * @property int $is_closed
  * @property int $product_id
- *
  * @property Conversation[] $conversations
  * @property User $customer
  * @property User $admin
@@ -129,13 +128,21 @@ class Ticket extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        if ($this->isNewRecord) {
-            if (parent::beforeSave($insert)) {
-                $this->customer_id = Yii::$app->user->getId();
-                return true;
-            }
+//        if ($this->isNewRecord) {
+//            if (parent::beforeSave($insert)) {
+//                $this->customer_id = Yii::$app->user->getId();
+//                return true;
+//            }
+//
+//        }
 
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->customer_id = Yii::$app->user->getId();
+            }
+            return true;
         }
+
     }
 
     public function afterFind()

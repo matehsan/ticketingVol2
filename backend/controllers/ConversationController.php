@@ -54,7 +54,7 @@ class ConversationController extends Controller
                 $new_conversation->file = '../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension;
                 $new_conversation->save();
             }
-
+            $ticket->admin_id = Yii::$app->user->id;
             $ticket->is_answered = 1;
             $ticket->save();
             return $this->redirect(['index', 'ticket_id' => $ticket_id]);
