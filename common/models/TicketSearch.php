@@ -2,9 +2,11 @@
 
 namespace common\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Ticket;
+use yii\db\conditions\AndCondition;
 
 /**
  * TicketSearch represents the model behind the search form of `common\models\Ticket`.
@@ -40,12 +42,15 @@ class TicketSearch extends Ticket
      */
     public function search($params)
     {
-        $query = Ticket::find();
+//        $query = Ticket::find()->where('admin_id='.Yii::$app->user->getId() )OR( 'admin_id='.NULL);
+        $query = Ticket::find()->where(['or','admin_id='.Yii::$app->user->getId(),['is','admin_id',null]]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+
+
         ]);
 
         $this->load($params);

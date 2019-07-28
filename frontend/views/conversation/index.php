@@ -57,12 +57,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php //todo aqa in akso bayad dors konim
     foreach ($conversations as $conversation){ ?>
         <div class="<?php if (User::findByUsername($conversation->user->username)->role == "customer"){echo 'userMessage';}else{echo 'admin';} ?>">
-            <?= $conversation->message ?>
-            <img src="<?php
-            if ($conversation->file) {
-                echo $conversation->file ;
-            }?>">
+
+            <div> <?= $conversation->message ?> </div>
+            <div> <img src="<?php if ($conversation->file) echo $conversation->file ; ?>" width="40%" > </div>
             <div class="pn"><code><?= $conversation->user->username." [ ".$conversation->created_at." ]"." ".'<i class="fas fa-file-image"></i>'?></code></div>
+
         </div>
 
 

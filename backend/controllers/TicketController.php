@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Ticket;
 use common\models\TicketSearch;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -47,11 +48,24 @@ class TicketController extends Controller
     public function actionIndex()
     {
         $searchModel = new TicketSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = Ticket::find()->where(['or','admin_id='.Yii::$app->user->getId(),['is','admin_id',null]]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 6,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'is_closed'=>SORT_ASC,
+                    'is_answered' => SORT_ASC,
+                    'created_at' => SORT_DESC,
 
+                ]
+            ],
+        ]);
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
