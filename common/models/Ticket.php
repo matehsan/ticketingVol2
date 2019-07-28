@@ -145,10 +145,10 @@ class Ticket extends \yii\db\ActiveRecord
 
     }
 
-    public function afterFind()
-    {
-        $this->created_at = Yii::$app->jdate->date('Y/m/d H:i', $this->created_at);
-        parent::afterFind();
-    }
+//    public function afterFind()
+//    {
+//        $this->created_at = Yii::$app->jdate->date('Y/m/d H:i', $this->created_at);
+//        parent::afterFind();
+//    }
 
 }
