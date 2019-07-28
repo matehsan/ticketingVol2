@@ -32,11 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'admin',
                 'format' => 'raw',
                 'value'=>function ($data) {
-                    $esm = \common\models\User::findIdentity($data->admin_id)->username;
-                    if (Yii::$app->user->identity->username == $esm ) {
-                        return "You";
+                    if (!$data->admin_id == null) {
+                        $esm = \common\models\User::findIdentity($data->admin_id)->username;
+                        if (Yii::$app->user->identity->username == $esm) {
+                            return "You";
+                        } else {
+                            return $esm;
+                        }
                     }else{
-                        return $esm;
+                        return "No one";
                     }
                 }
             ],
