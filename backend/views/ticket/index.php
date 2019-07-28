@@ -14,9 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Ticket', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -26,11 +23,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'subject',
             'message:ntext',
             'customer_id',
-            'admin_id',
+            //'admin_id',
+            [
+                'label'=>'admin',
+                'format' => 'raw',
+                'value'=>function ($data) {
+                    $esm = \common\models\User::findIdentity($data->admin_id)->username;
+                    if (Yii::$app->user->identity->username == $esm ) {
+                        return "You";
+                    }else{
+                        return $esm;
+                    }
+                }
+            ],
             [
                 'label'=>'Created at',
                 'format' => 'raw',
