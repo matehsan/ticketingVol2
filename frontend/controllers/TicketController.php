@@ -125,7 +125,7 @@ class TicketController extends Controller
         $ticket = Ticket::findOne($ticket_id);
         $ticket->is_closed = 1;
         $ticket->save();
-        $this->redirect('index');
+        $this->redirect('index.php?r=ticket/index');
     }
     protected function findModel($id)
     {

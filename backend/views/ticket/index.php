@@ -31,14 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'message:ntext',
             'customer_id',
             'admin_id',
-//            [
-//                'label'=>'Created at',
-//                'format' => 'raw',
-//                'value'=>function ($data) {
-//                    return Yii::$app->jdate->date('Y/m/d',$data->created_at);
-//                }
-//            ],
-            'created_at',
+            [
+                'label'=>'Created at',
+                'format' => 'raw',
+                'value'=>function ($data) {
+                    return Yii::$app->jdate->date('Y/m/d H:i',$data->created_at);
+                }
+            ],
+//            'created_at',
             //'is_answered',
             //'is_closed',
             //'product_id',

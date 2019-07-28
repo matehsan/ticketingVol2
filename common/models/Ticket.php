@@ -128,14 +128,6 @@ class Ticket extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-//        if ($this->isNewRecord) {
-//            if (parent::beforeSave($insert)) {
-//                $this->customer_id = Yii::$app->user->getId();
-//                return true;
-//            }
-//
-//        }
-
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
                 $this->customer_id = Yii::$app->user->getId();
@@ -145,10 +137,6 @@ class Ticket extends \yii\db\ActiveRecord
 
     }
 
-    public function afterFind()
-    {
-        $this->created_at = Yii::$app->jdate->date('Y/m/d H:i', $this->created_at);
-        parent::afterFind();
-    }
+
 
 }
