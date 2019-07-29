@@ -39,6 +39,7 @@ class Conversation extends \yii\db\ActiveRecord
             [['user_id', 'ticket_id'], 'integer'],
             [['created_at','updated_at'], 'safe'],
             [['message','file'], 'string', 'max' => 300],
+            [['file'],'file','extensions'=>'png,jpg,pdf,docx'],
             [['ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ticket::className(), 'targetAttribute' => ['ticket_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];

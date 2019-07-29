@@ -63,13 +63,20 @@ $this->params['breadcrumbs'][] = $this->title;
         } else {
             echo 'admin';
         } ?>">
-            <?= $conversation->message ?>
-            <img src="<?php
-            if ($conversation->file) {
-                echo $conversation->file ;
-            }?>">
-            <div class="pn"><code><?= $conversation->user->username . " [ " . $conversation->created_at . " ]" ?></code>
-            </div>
+            <div> <?= $conversation->message ?> </div>
+
+            <?php if ($conversation->file) {
+
+                $pos=strrpos($conversation->file,'.') ;
+                $extension=substr($conversation->file,strrpos($conversation->file,'.'));
+                ?>
+                <?php
+                if($extension=='.png' || $extension=='.jpg'){ ?>
+                    <div><a href="<?php echo $conversation->file ?>"><img src="<?php echo $conversation->file ?>" width="45%"></a></div><?php }
+                else{ ?>
+                    <div><a href="<?php echo $conversation->file ?>" download><div style="background-attachment: local">download attachFile</div></a></div> <?php } ?>
+            <?php } ?>
+            <div class="pn"><code><?= $conversation->user->username." [ ".$conversation->created_at." ]"." ".'<i class="fas fa-file-image"></i>'?></code></div>
         </div>
 
 

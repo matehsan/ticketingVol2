@@ -15,23 +15,23 @@ use yii\grid\GridView;
 $this->title = 'conversations';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 <div class="answer-index">
 
     <p>
         <?php
-        $ticket=Ticket::findOne(Yii::$app->request->get('ticket_id'));
-        if($ticket->is_closed==true){
+        $ticket = Ticket::findOne(Yii::$app->request->get('ticket_id'));
+        if ($ticket->is_closed == true) {
             $this->title = 'conversations is closed';
-        }
-        else{
+        } else {
             $this->title = 'conversations';
         }
         ?>
     </p>
     <style>
-        .userMessage{
+        .userMessage {
             word-wrap: break-word;
             border-radius: 5px;
             background-color: #86BB71;
@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             padding: 10px;
             text-align: left;
         }
+
         .admin {
             word-wrap: break-word;
             border-radius: 5px;
@@ -47,7 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
             padding: 10px;
             text-align: left;
         }
-        .pn{
+
+        .pn {
             text-align: right;
             color: grey;
         }
@@ -55,16 +57,32 @@ $this->params['breadcrumbs'][] = $this->title;
     </style>
 
     <?php //todo aqa in akso bayad dors konim
-    foreach ($conversations as $conversation){ ?>
-        <div class="<?php if (User::findByUsername($conversation->user->username)->role == "customer"){echo 'userMessage';}else{echo 'admin';} ?>">
+    foreach ($conversations as $conversation) { ?>
+        <div class="<?php if (User::findByUsername($conversation->user->username)->role == "customer") {
+            echo 'userMessage';
+        } else {
+            echo 'admin';
+        } ?>">
 
             <div> <?= $conversation->message ?> </div>
-            <div> <img src="<?php if ($conversation->file) echo $conversation->file ; ?>" width="40%" > </div>
-            <div class="pn"><code><?= $conversation->user->username." [ ".$conversation->created_at." ]"." ".'<i class="fas fa-file-image"></i>'?></code></div>
+
+            <?php if ($conversation->file) {
+
+                     $pos=strrpos($conversation->file,'.') ;
+                     $extension=substr($conversation->file,strrpos($conversation->file,'.'));
+                    ?>
+                <?php
+                if($extension=='.png' || $extension=='.jpg'){ ?>
+                <div><a href="<?php echo $conversation->file ?>"><img src="<?php echo $conversation->file ?>" width="45%"></a></div><?php }
+                else{ ?>
+                <div><a href="<?php echo $conversation->file ?>" download><div style="background-attachment: local">download attachFile</div></a></div> <?php } ?>
+            <?php } ?>
+
+            <div class="pn">
+                <code><?= $conversation->user->username . " [ " . $conversation->created_at . " ]" . " " . '<i class="fas fa-file-image"></i>' ?></code>
+            </div>
 
         </div>
-
-
 
 
     <?php } ?>
@@ -75,19 +93,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <?php
-    if(!$ticket->is_closed==true){
-        $form =ActiveForm::begin();
-        ?>
+    if (!$ticket->is_closed == true){
+    $form = ActiveForm::begin();
+    ?>
 
-                <h3><?= $form->field($new_conversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?></h3>
-                <h6><?= $form->field($new_conversation, 'file')->fileInput()?></h6>
-                <?php
-                echo Html::submitButton('ارسال پیام', ['class' => 'btn btn-success'])." ";
-                echo  Html::a('بستن تیکت',['ticket/close','ticket_id'=>Yii::$app->request->get('ticket_id')],['class'=>'btn btn-danger'])
+    <h3><?= $form->field($new_conversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?></h3>
+    <h6><?= $form->field($new_conversation, 'file')->fileInput() ?></h6>
+    <?php
+    echo Html::submitButton('ارسال پیام', ['class' => 'btn btn-success']) . " ";
+    echo Html::a('بستن تیکت', ['ticket/close', 'ticket_id' => Yii::$app->request->get('ticket_id')], ['class' => 'btn btn-danger'])
 
-                ?>
+    ?>
 
-        </div>
-        <?php ActiveForm::end() ; ?><?php } ?>
+</div>
+<?php ActiveForm::end(); ?><?php } ?>
 
 </div>
