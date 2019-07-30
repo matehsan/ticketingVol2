@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d7ebffb522f9a92b2dc3979b692a1e8",
+    "content-hash": "43a36644db7e7b1cf6a55abeba24377a",
     "packages": [
+        {
+            "name": "airani/yii2-bootstrap-rtl",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/airani/yii2-bootstrap-rtl.git",
+                "reference": "5231b39ccf69e806ef5a024a67e57f91ae484267"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/airani/yii2-bootstrap-rtl/zipball/5231b39ccf69e806ef5a024a67e57f91ae484267",
+                "reference": "5231b39ccf69e806ef5a024a67e57f91ae484267",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap": "3.4.* |3.3.* | 3.2.* | 3.1.*",
+                "bower-asset/bootstrap-rtl": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "airani\\bootstrap\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ali Irani",
+                    "email": "ali@irani.im"
+                }
+            ],
+            "description": "The Twitter Bootstrap Rtl extension for the Yii 2.0 framework",
+            "keywords": [
+                "bootstrap",
+                "rtl",
+                "yii2"
+            ],
+            "time": "2019-01-07T13:43:23+00:00"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
@@ -25,6 +68,27 @@
             "type": "bower-asset",
             "license": [
                 "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/bootstrap-rtl",
+            "version": "v3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/morteza/bootstrap-rtl.git",
+                "reference": "961dc50152095a948ffcd57a5df154856b4e49b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/morteza/bootstrap-rtl/zipball/961dc50152095a948ffcd57a5df154856b4e49b7",
+                "reference": "961dc50152095a948ffcd57a5df154856b4e49b7"
+            },
+            "require": {
+                "bower-asset/bootstrap": ">=3.3.0"
+            },
+            "type": "bower-asset",
+            "license": [
+                "Unlicensed Public Domain"
             ]
         },
         {
@@ -71,7 +135,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bestiejs/punycode.js.git",
+                "url": "https://github.com/bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -371,6 +435,18 @@
                 "yiiframeowrk"
             ],
             "time": "2016-12-27T09:48:31+00:00"
+        },
+        {
+            "name": "npm-asset/bootstrap",
+            "version": "4.3.1",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.3.1.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -831,6 +907,75 @@
                 "yii2"
             ],
             "time": "2019-04-23T13:18:43+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-bootstrap4",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-bootstrap4.git",
+                "reference": "c47ec7b53f45ce16f63d6e65cc952d517b432931"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap4/zipball/c47ec7b53f45ce16f63d6e65cc952d517b432931",
+                "reference": "c47ec7b53f45ce16f63d6e65cc952d517b432931",
+                "shasum": ""
+            },
+            "require": {
+                "npm-asset/bootstrap": "^4.3",
+                "yiisoft/yii2": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "<7",
+                "yiisoft/yii2-coding-standards": "~2.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\bootstrap4\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/"
+                },
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "amigo.cobos@gmail.com"
+                },
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                },
+                {
+                    "name": "Simon Karlen",
+                    "email": "simi.albi@outlook.com"
+                }
+            ],
+            "description": "The Twitter Bootstrap extension for the Yii framework",
+            "keywords": [
+                "bootstrap",
+                "bootstrap4",
+                "yii2"
+            ],
+            "time": "2019-07-23T16:25:05+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",

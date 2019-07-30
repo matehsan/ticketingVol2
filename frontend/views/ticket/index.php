@@ -7,9 +7,9 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\TicketSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Ticket';
+$this->title = 'تیکت ها';
 $this->params['breadcrumbs'][] = $this->title;
-echo "<h1>"."Your ".$this->title."</h1>"
+echo "<h1>تیکت های شما</h1>"
 ?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -23,7 +23,7 @@ echo "<h1>"."Your ".$this->title."</h1>"
 //        'customer_id',
 //        'admin_id',
         [
-            'label'=>'Created at',
+            'label'=>'زمان ایجاد',
             'format' => 'raw',
             'value'=>function ($data) {
                 return Yii::$app->jdate->date('Y/m/d H:i',$data->created_at);
@@ -34,7 +34,7 @@ echo "<h1>"."Your ".$this->title."</h1>"
         //'is_closed',
         'product_id',
         [
-            'label' => 'situation',
+            'label' => 'وضعیت',
             'format' => 'raw',
             'value' => function ($data) {
                 if($data->is_closed==false) {

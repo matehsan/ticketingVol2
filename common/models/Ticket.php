@@ -61,14 +61,14 @@ class Ticket extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'subject' => 'Subject',
-            'message' => 'Message',
+            'subject' => 'موضوع',
+            'message' => 'پیام',
             'customer_id' => 'Customer ID',
             'admin_id' => 'Admin ID',
             'created_at' => 'Created At',
             'is_answered' => 'Is Answered',
             'is_closed' => 'Is Closed',
-            'product_id' => 'Product ID',
+            'product_id' => 'محصول',
         ];
     }
 

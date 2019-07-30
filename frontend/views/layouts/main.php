@@ -29,26 +29,26 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'اورس',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'ثبت نام', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'ورود', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'خروج (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
             . '</li>';
-        $menuItems[] = ['label' => 'tickets', 'url' => ['/ticket/index']];
-        $menuItems[] = ['label' => 'createTicket', 'url' => ['/ticket/create']];
+        $menuItems[] = ['label' => 'تیکت ها', 'url' => ['/ticket/index']];
+        $menuItems[] = ['label' => 'ساخت تیکت', 'url' => ['/ticket/create']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -68,9 +68,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        <p class="pull-left font-face">&copy Avers Tickting <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">توسعه یافته توسط اورس</p>
     </div>
 </footer>
 
