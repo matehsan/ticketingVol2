@@ -1,5 +1,14 @@
+@font-face {
+    font-family: Samim;
+    src: url('fonts/Samim.eot');
+    src: url('fonts/Samim.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Samim.woff') format('woff'),
+    url('fonts/Samim.ttf') format('truetype');
+    font-weight: normal;
+}
 html,
 body {
+    font-family: Samim;
     height: 100%;
 }
 

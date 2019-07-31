@@ -29,24 +29,24 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'ادمین',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'خانه', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'ورود', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Ticket', 'url' => ['/ticket/index']];
-        $menuItems[] = ['label' => 'Products', 'url' => ['/product/index']];
+        $menuItems[] = ['label' => 'تیکت ها', 'url' => ['/ticket/index']];
+        $menuItems[] = ['label' => 'محصولات', 'url' => ['/product/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'خروج (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
@@ -70,9 +70,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        <p class="pull-left font-face">&copy Avers Tickting <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">توسعه یافته توسط اورس</p>
     </div>
 </footer>
 

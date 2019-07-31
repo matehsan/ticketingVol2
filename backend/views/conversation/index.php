@@ -16,7 +16,7 @@ use yii\web\View;
 /* @var $conversations yii\data\ActiveDataProvider */
 /* @var $new_conversation common\models\Conversation */
 /* @var $model common\models\conversation */
-$this->title = 'conversations';
+$this->title = 'مکالمات';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="answer-index">
@@ -25,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
         $ticket = Ticket::findOne(Yii::$app->request->get('ticket_id'));
         if ($ticket->is_closed == true) {
-            $this->title = 'conversations is closed';
+            echo $this->title = 'مکالمه ی مورد نظر بسته شده';
         } else {
-            $this->title = 'conversations';
+            echo $this->title = 'مکالمات';
         }
         ?>
     </p>
@@ -92,8 +92,8 @@ $this->params['breadcrumbs'][] = $this->title;
     $form = ActiveForm::begin();
     ?>
 
-    <h3><?= $form->field($new_conversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?></h3>
-    <h6><?= $form->field($new_conversation, 'file')->fileInput() ?></h6>
+    <?= $form->field($new_conversation, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),])->label('پیام') ?>
+    <h6><?= $form->field($new_conversation, 'file')->fileInput()->label('فایل') ?></h6>
 </div>
 <?php
 echo Html::submitButton('ارسال پیام', ['class' => 'btn btn-success'])." ";
