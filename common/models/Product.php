@@ -29,7 +29,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name'], 'string', 'max' => 11],
+            [['name'], 'string', 'max' => 50],
         ];
     }
 
@@ -40,7 +40,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'نام محصول',
         ];
     }
 
