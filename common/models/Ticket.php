@@ -43,11 +43,13 @@ class Ticket extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subject', 'message', 'product_id'], 'required'],
+            [['subject', 'message'], 'required'],
             [['message'], 'string'],
             [['customer_id', 'admin_id', 'is_answered', 'is_closed', 'product_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['subject', 'file'], 'string', 'max' => 100],
+            [['file'], 'string', 'max' => 100],
+            [['subject'], 'string', 'max' => 40],
+            [['message'], 'string', 'max' => 1000],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['customer_id' => 'id']],
             [['admin_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['admin_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
