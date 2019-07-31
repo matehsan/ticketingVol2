@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div>
     <?= $form->field($ticket, 'product_id')->dropDownList(
         ArrayHelper::map(product::find()->all(), 'id', 'name'),
-        ['prompt' => 'انتخاب کنید...']
+        ['prompt' => 'سایر ...']
 
     )->label('نوع') ?></div>
 

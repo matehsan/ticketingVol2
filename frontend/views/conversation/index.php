@@ -15,8 +15,6 @@ use yii\grid\GridView;
 $this->title = 'مکالمات';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 <div class="answer-index">
 
@@ -79,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php } ?>
 
             <div class="pn">
-                <code><?= $conversation->user->username . " [ " . $conversation->created_at . " ]" . " " . '<i class="fas fa-file-image"></i>' ?></code>
+                <code><?= $conversation->user->username . " [ " . $conversation->created_at . " ]" . " "  ?></code>
             </div>
 
         </div>

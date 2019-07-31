@@ -19,7 +19,22 @@ echo "<h1>تیکت های شما</h1>"
 
 //        'id',
         'subject',
-        'message:ntext',
+        //'message:ntext',
+        [
+            'label'=>'پیام ها',
+            'format' => 'raw',
+            'value'=>function ($data) {
+                if (strlen($data->message) > 150){
+
+                    $maxLength = 149;
+                    $yourString = substr($data->message, 0, $maxLength);
+
+                    return $yourString.'...';
+                }else{
+                    return $data->message;
+                };
+            }
+        ],
 //        'customer_id',
 //        'admin_id',
         [
@@ -32,7 +47,18 @@ echo "<h1>تیکت های شما</h1>"
 //        'created_at',
         //'is_answered',
         //'is_closed',
-        'product_id',
+        //'product_id',
+        [
+            'label'=>'محصول',
+            'format' => 'raw',
+            'value'=>function ($data) {
+                if ($data->product_id == null){
+                    return "سایر";
+                }else{
+                    return $data->product->name ;
+                }
+            }
+        ],
         [
             'label' => 'وضعیت',
             'format' => 'raw',
@@ -51,5 +77,6 @@ echo "<h1>تیکت های شما</h1>"
         ],
     ],
 ]); ?>
+
 
 
