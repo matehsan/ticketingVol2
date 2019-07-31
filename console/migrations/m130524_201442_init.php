@@ -34,7 +34,7 @@ class m130524_201442_init extends Migration
             'created_at' => $this->integer(),
             'is_answered' => $this->integer()->notNull()->defaultValue(0),
             'is_closed' => $this->integer()->notNull()->defaultValue(0),
-            'product_id' => $this->integer()->notNull(),
+            'product_id' => $this->integer(),
             'file' => $this->text(),
         ], $tableOptions);
 
