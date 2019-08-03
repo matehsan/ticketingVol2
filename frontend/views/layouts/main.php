@@ -47,6 +47,7 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
+        $menuItems[] = ['label' => ' پنل کاربری', 'url' => ['/user/view']];
         $menuItems[] = ['label' => 'تیکت ها', 'url' => ['/ticket/index']];
         $menuItems[] = ['label' => 'ساخت تیکت', 'url' => ['/ticket/create']];
     }

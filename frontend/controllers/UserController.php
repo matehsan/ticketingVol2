@@ -65,47 +65,13 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView()
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel(Yii::$app->user->getId()),
         ]);
     }
 
-
-    /**
-     * Updates an existing User model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing User model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
 
     /**
      * Finds the User model based on its primary key value.
@@ -121,5 +87,24 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionChangePassword()
+    {
+        $id = \Yii::$app->user->id;
+
+        try {
+            $model = new \frontend\models\ChangePasswordForm($id);
+        } catch (InvalidParamException $e) {
+            throw new \yii\web\BadRequestHttpException($e->getMessage());
+        }
+
+        if ($model->load(\Yii::$app->request->post()) && $model->validate() && $model->changePassword()) {
+            \Yii::$app->session->setFlash('success', 'گذرواژه با موفقیت تغییر کرد');
+            $this->redirect(['view']);
+        }
+
+        return $this->render('changePassword', [
+            'model' => $model,
+        ]);
     }
 }

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = $model->id;
+$this->title = 'پنل کاربری';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -15,32 +15,53 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'role',
-            'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            'email:email',
-            'status',
-            'created_at',
-            'updated_at',
-            'verification_token',
+//            'id',
+//            'role',
+            //'username',
+            [
+                'label'=>'نام کاربری',
+                'format' => 'raw',
+                'value'=>function ($data) {
+                    return $data->username;
+                }
+            ],
+//            'auth_key',
+//            'password_hash',
+//            'password_reset_token',
+            //'email:email',
+            [
+                'label'=>'پست الکترونیکی',
+                'format' => 'raw',
+                'value'=>function ($data) {
+                    return $data->email;
+                }
+            ],
+//            'status',
+            //'created_at',
+            [
+                'label'=>'زمان ایجاد',
+                'format' => 'raw',
+                'value'=>function ($data) {
+                    return Yii::$app->jdate->date('Y/m/d H:i',$data->created_at);
+                }
+            ],
+            //'updated_at',
+            [
+                'label'=>'آخرین تغییر',
+                'format' => 'raw',
+                'value'=>function ($data) {
+                    return Yii::$app->jdate->date('Y/m/d H:i',$data->updated_at);
+                }
+            ],
+//            'verification_token',
         ],
     ]) ?>
 
 </div>
+<p>
+    <?= Html::a('بازنگری گذرواژه', ['change-password'], ['class' => 'btn btn-primary']) ?>
+</p>
