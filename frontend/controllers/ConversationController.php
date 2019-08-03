@@ -52,17 +52,17 @@ class ConversationController extends Controller
                     if(UploadedFile::getInstance($new_conversation, 'file')) {
                         $file = UploadedFile::getInstance($new_conversation, 'file');
 
-                        $dir='../../common/uploads/ticket/' . $ticket_id . '/' ;
+                        $dir='uploads/ticket/' . $ticket_id . '/' ;
                         if(is_dir($dir) && file_exists($dir)) {
 
-                            $file->saveAs('../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension);
+                            $file->saveAs('uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension);
                         }
                         else{
-                            mkdir('../../common/uploads/ticket/' . $ticket->id . '', 0777, true);
-                            $file->saveAs('../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension);
+                            mkdir('uploads/ticket/' . $ticket->id . '', 0777, true);
+                            $file->saveAs('uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension);
                         }
 
-                        $new_conversation->file = '../../common/uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension;
+                        $new_conversation->file = 'uploads/ticket/' . $ticket_id . '/' . $new_conversation->id . '_conversation.' . $file->extension;
                         $new_conversation->save();
                     }
 

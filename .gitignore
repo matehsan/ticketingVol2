@@ -44,3 +44,4 @@ phpunit.phar
 
 #uploads folder
 /common/uploads/ticket/
+/frontend/web/uploads/ticket

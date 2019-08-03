@@ -106,10 +106,10 @@ class TicketController extends Controller
                 $conversation->save();
 
                 if(UploadedFile::getInstance($ticket,'file')) {
-                    mkdir('../../common/uploads/ticket/' . $ticket->id . '', 0777, true);
+                    mkdir('uploads/ticket/' . $ticket->id . '', 0777, true);
                     $file = UploadedFile::getInstance($ticket, 'file');
-                    $file->saveAs('../../common/uploads/ticket/' . $ticket->id . '/' . $conversation->id . '_conversation.' . $file->extension);
-                    $conversation->file = '../../common/uploads/ticket/' . $ticket->id . '/' . $conversation->id . '_conversation.' . $file->extension;
+                    $file->saveAs('uploads/ticket/' . $ticket->id . '/' . $conversation->id . '_conversation.' . $file->extension);
+                    $conversation->file = 'uploads/ticket/' . $ticket->id . '/' . $conversation->id . '_conversation.' . $file->extension;
                     $conversation->save();
                 }
 
